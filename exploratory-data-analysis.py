@@ -91,50 +91,50 @@ print("Model Accuracy:", accuracy_score(y_test, y_pred))
 # Another version 
 
 
-data = load_breast_cancer()
-df = pd.DataFrame(data.data, columns=data.feature_names)
-df['target'] = data.target
+# data = load_breast_cancer()
+# df = pd.DataFrame(data.data, columns=data.feature_names)
+# df['target'] = data.target
 
 
-basic_stats = df.describe()
-print(basic_stats)
+# basic_stats = df.describe()
+# print(basic_stats)
 
-# Missing values
-print(df.isnull().sum())
-
-
-sns.countplot(x='target', data=df)
-plt.show()
-
-# Detect outliers using Z-score for 'mean radius'
-z_scores = np.abs(stats.zscore(df['mean radius']))
-outliers = np.where(z_scores > 3)
-print("outliers  ****************************")
-print(outliers)
-
-# Normalization/Standardization
-scaler = StandardScaler()
-scaled_features = scaler.fit_transform(df.drop('target', axis=1))
-df_scaled = pd.DataFrame(scaled_features, columns=df.columns[:-1])
+# # Missing values
+# print(df.isnull().sum())
 
 
-df_scaled['area_perimeter_ratio'] = df_scaled['mean area'] / df_scaled['mean perimeter']
+# sns.countplot(x='target', data=df)
+# plt.show()
 
-selected_features = ['mean radius', 'mean texture', 'mean perimeter', 'mean area']
-plt.figure(figsize=(15, 10))
-for i, feature in enumerate(selected_features, 1):
-    plt.subplot(2, 2, i)
-    sns.histplot(df[feature], kde=True, bins=20)
-    plt.title(f'Distribution of {feature}')
-    plt.xlabel(feature)
-    plt.ylabel('Count')
+# # Detect outliers using Z-score for 'mean radius'
+# z_scores = np.abs(stats.zscore(df['mean radius']))
+# outliers = np.where(z_scores > 3)
+# print("outliers  ****************************")
+# print(outliers)
+
+# # Normalization/Standardization
+# scaler = StandardScaler()
+# scaled_features = scaler.fit_transform(df.drop('target', axis=1))
+# df_scaled = pd.DataFrame(scaled_features, columns=df.columns[:-1])
 
 
-plt.figure(figsize=(15, 15))
-corr_matrix = df.corr()
-sns.heatmap(corr_matrix, annot=False, cmap='coolwarm')
-plt.title('Correlation Matrix of Breast Cancer Features')
-plt.show()
+# df_scaled['area_perimeter_ratio'] = df_scaled['mean area'] / df_scaled['mean perimeter']
+
+# selected_features = ['mean radius', 'mean texture', 'mean perimeter', 'mean area']
+# plt.figure(figsize=(15, 10))
+# for i, feature in enumerate(selected_features, 1):
+#     plt.subplot(2, 2, i)
+#     sns.histplot(df[feature], kde=True, bins=20)
+#     plt.title(f'Distribution of {feature}')
+#     plt.xlabel(feature)
+#     plt.ylabel('Count')
+
+
+# plt.figure(figsize=(15, 15))
+# corr_matrix = df.corr()
+# sns.heatmap(corr_matrix, annot=False, cmap='coolwarm')
+# plt.title('Correlation Matrix of Breast Cancer Features')
+# plt.show()
 
 
 
