@@ -1,0 +1,32 @@
+name: Generate Report on Push
+
+on: [push]
+
+jobs:
+  build-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Python script
+      run: python your-script.py
+
+    - name: Generate PDF report
+      run: python generate-report.py # If report generation is separate
+
+    # If you want to upload the report as an artifact
+    - name: Upload Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: report
+        path: path/to/your/report.pdf
