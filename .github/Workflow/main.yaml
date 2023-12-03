@@ -19,7 +19,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Python script
-      run: python your-script.py
+      run: python exploratory-data-analysis.py
 
     - name: Generate PDF report
       run: python generate-report.py # If report generation is separate
