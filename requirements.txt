@@ -1,4 +1,4 @@
-nump
+numpy
 matplotlib.pyplot
 seaborn
 sklearn
